@@ -18,7 +18,7 @@ import {
   CTableHeaderCell,
   CTableRow,
 } from '@coreui/react'
-import { CChartLine } from '@coreui/react-chartjs'
+import { CChart, CChartLine } from '@coreui/react-chartjs'
 import { getStyle, hexToRgba } from '@coreui/utils'
 import CIcon from '@coreui/icons-react'
 import {
@@ -42,7 +42,10 @@ import {
   cilPeople,
   cilUser,
   cilUserFemale,
+  cibUbuntu,
 } from '@coreui/icons'
+
+import { games } from './data'
 
 import avatar1 from 'src/assets/images/avatars/1.jpg'
 import avatar2 from 'src/assets/images/avatars/2.jpg'
@@ -51,132 +54,190 @@ import avatar4 from 'src/assets/images/avatars/4.jpg'
 import avatar5 from 'src/assets/images/avatars/5.jpg'
 import avatar6 from 'src/assets/images/avatars/6.jpg'
 
-import WidgetsBrand from '../widgets/WidgetsBrand'
-import WidgetsDropdown from '../widgets/WidgetsDropdown'
+import WidgetsBrand from './widget'
+import WidgetsDropdown from './wij'
 
 const Dashboard = () => {
   const random = (min, max) => Math.floor(Math.random() * (max - min + 1) + min)
+  const requestOptions = {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization:
+        'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJncHJpbWUiLCJzdWIiOiI1ZjViZGE0M2Y2YWFhYTJhNjhjNGIyNzQiLCJpYXQiOjE1OTk4NTUxNzIxNTIsImV4cCI6MTYzMTM5MTE3MjE1Mn0.aQcCPEeIEpMhiyc6vYcoDRTGqPJ67br_cQ2xzNzFtKA',
+    },
+  }
 
-  const progressExample = [
-    { title: 'Visits', value: '29.703 Users', percent: 40, color: 'success' },
-    { title: 'Unique', value: '24.093 Users', percent: 20, color: 'info' },
-    { title: 'Pageviews', value: '78.706 Views', percent: 60, color: 'warning' },
-    { title: 'New Users', value: '22.123 Users', percent: 80, color: 'danger' },
-    { title: 'Bounce Rate', value: 'Average Rate', percent: 40.15, color: 'primary' },
-  ]
+  try {
+    fetch(
+      'http://ec2-18-221-225-136.us-east-2.compute.amazonaws.com:5000/api/sequence/add',
+      requestOptions,
+    )
+      .then((response) => response.json())
+      .then((res) => {
+        console.log(res)
+      })
+  } catch (err) {
+    console.log(err)
+  }
 
-  const progressGroupExample1 = [
-    { title: 'Monday', value1: 34, value2: 78 },
-    { title: 'Tuesday', value1: 56, value2: 94 },
-    { title: 'Wednesday', value1: 12, value2: 67 },
-    { title: 'Thursday', value1: 43, value2: 91 },
-    { title: 'Friday', value1: 22, value2: 73 },
-    { title: 'Saturday', value1: 53, value2: 82 },
-    { title: 'Sunday', value1: 9, value2: 69 },
-  ]
+  // const progressExample = [
+  //   { title: 'Visits', value: '29.703 Users', percent: 40, color: 'success' },
+  //   { title: 'Unique', value: '24.093 Users', percent: 20, color: 'info' },
+  //   { title: 'Pageviews', value: '78.706 Views', percent: 60, color: 'warning' },
+  //   { title: 'New Users', value: '22.123 Users', percent: 80, color: 'danger' },
+  //   { title: 'Bounce Rate', value: 'Average Rate', percent: 40.15, color: 'primary' },
+  // ]
 
-  const progressGroupExample2 = [
-    { title: 'Male', icon: cilUser, value: 53 },
-    { title: 'Female', icon: cilUserFemale, value: 43 },
-  ]
+  const progressExample = games.map((game) => {
+    return {
+      title: game.name,
+      value: game.purchasePrice,
+      percent: game.perDay,
+      color: 'info',
+    }
+  })
 
-  const progressGroupExample3 = [
-    { title: 'Organic Search', icon: cibGoogle, percent: 56, value: '191,235' },
-    { title: 'Facebook', icon: cibFacebook, percent: 15, value: '51,223' },
-    { title: 'Twitter', icon: cibTwitter, percent: 11, value: '37,564' },
-    { title: 'LinkedIn', icon: cibLinkedin, percent: 8, value: '27,319' },
-  ]
+  // const progressGroupExample1 = [
+  //   { title: 'Monday', value1: 34, value2: 78 },
+  //   { title: 'Tuesday', value1: 56, value2: 94 },
+  //   { title: 'Wednesday', value1: 12, value2: 67 },
+  //   { title: 'Thursday', value1: 43, value2: 91 },
+  //   { title: 'Friday', value1: 22, value2: 73 },
+  //   { title: 'Saturday', value1: 53, value2: 82 },
+  //   { title: 'Sunday', value1: 9, value2: 69 },
+  // ]
 
-  const tableExample = [
-    {
-      avatar: { src: avatar1, status: 'success' },
+  const progressGroupExample1 = games.map((game) => {
+    return {
+      title: game.name,
+      value1: game.purchasePriceInPKR ? game.purchasePriceInPKR : 2000,
+      value2: game.minimumSubscription ? game.minimumSubscription : 100,
+    }
+  })
+
+  // const progressGroupExample2 = [
+  //   { title: 'Male', icon: cilUser, value: 53 },
+  //   { title: 'Female', icon: cilUserFemale, value: 43 },
+  // ]
+
+  const progressGroupExample2 = games.map((game) => {
+    return {
+      title:
+        game.primary == 'Undefined' || game.primary == 'Not Set'
+          ? `User ${game.region}`
+          : `${game.primary} ${game.region}`,
+      icon: cilUser,
+      value: game.perDay > 100 ? 100 : game.perDay,
+    }
+  })
+
+  // const progressGroupExample3 = [
+  //   { title: 'Organic Search', icon: cibGoogle, percent: 56, value: '191,235' },
+  //   { title: 'Facebook', icon: cibFacebook, percent: 15, value: '51,223' },
+  //   { title: 'Twitter', icon: cibTwitter, percent: 11, value: '37,564' },
+  //   { title: 'LinkedIn', icon: cibLinkedin, percent: 8, value: '27,319' },
+  // ]
+
+  const consoleCount = games.reduce((acc, curr) => {
+    if (acc[curr.console]) {
+      acc[curr.console]++
+    } else {
+      acc[curr.console] = 1
+    }
+    return acc
+  }, {})
+
+  const progressGroupExample3 = Object.keys(consoleCount).map((key) => {
+    return {
+      title: key,
+      icon: cibGoogle,
+      percent: consoleCount[key],
+      value: consoleCount[key],
+    }
+  })
+
+  const gameTypeCount = games.reduce((acc, curr) => {
+    if (acc[curr.gameType]) {
+      acc[curr.gameType]++
+    } else {
+      acc[curr.gameType] = 1
+    }
+    return acc
+  }, {})
+
+  const progressGroupExample4 = Object.keys(gameTypeCount).map((key) => {
+    return {
+      title: key !== 'undefined' ? key : 'Other',
+      icon: cibUbuntu,
+      percent: gameTypeCount[key],
+      value: gameTypeCount[key],
+    }
+  })
+
+  const totalNumberOfGames = games.reduce((acc, curr) => {
+    return acc + parseInt(curr._id)
+  }, 0)
+  const totalPurchasePrice = games.reduce((acc, curr) => {
+    return acc + parseInt(curr.purchasePrice)
+  }, 0)
+  const totalMinimumSubscription = games.reduce((acc, curr) => {
+    return acc + parseInt(curr.minimumSubscription)
+  }, 0)
+
+  const totalNumberOfPurchasedGames = games.reduce((acc, curr) => {
+    if (curr.purchaseStatus == 'Purchased' || curr.purchaseStatus == 'Purchashed') {
+      return acc + 1
+    } else {
+      return acc
+    }
+  }, 0)
+
+  const getRandomColor = () => {
+    const colors = ['info', 'success', 'warning', 'primary', 'danger']
+    return colors[Math.floor(Math.random() * colors.length)]
+  }
+
+  const tableExample = games.map((game) => {
+    return {
+      avatar: game.imageURL,
       user: {
-        name: 'Yiorgos Avraamu',
+        name:
+          game.primary == 'Undefined' || game.primary == 'Not Set'
+            ? `User ${game.region}`
+            : game.primary,
         new: true,
-        registered: 'Jan 1, 2021',
+        registered: game.year == 'Undefined' || game.year == 'Not Set' ? game.year : 2019,
       },
       country: { name: 'USA', flag: cifUs },
       usage: {
-        value: 50,
-        period: 'Jun 11, 2021 - Jul 10, 2021',
-        color: 'success',
+        value: game.perDay > 100 ? 100 : game.perDay - 5,
+        period: game.createdAt,
+        color: getRandomColor(),
       },
       payment: { name: 'Mastercard', icon: cibCcMastercard },
-      activity: '10 sec ago',
-    },
-    {
-      avatar: { src: avatar2, status: 'danger' },
-      user: {
-        name: 'Avram Tarasios',
-        new: false,
-        registered: 'Jan 1, 2021',
-      },
-      country: { name: 'Brazil', flag: cifBr },
-      usage: {
-        value: 22,
-        period: 'Jun 11, 2021 - Jul 10, 2021',
-        color: 'info',
-      },
-      payment: { name: 'Visa', icon: cibCcVisa },
-      activity: '5 minutes ago',
-    },
-    {
-      avatar: { src: avatar3, status: 'warning' },
-      user: { name: 'Quintin Ed', new: true, registered: 'Jan 1, 2021' },
-      country: { name: 'India', flag: cifIn },
-      usage: {
-        value: 74,
-        period: 'Jun 11, 2021 - Jul 10, 2021',
-        color: 'warning',
-      },
-      payment: { name: 'Stripe', icon: cibCcStripe },
-      activity: '1 hour ago',
-    },
-    {
-      avatar: { src: avatar4, status: 'secondary' },
-      user: { name: 'Enéas Kwadwo', new: true, registered: 'Jan 1, 2021' },
-      country: { name: 'France', flag: cifFr },
-      usage: {
-        value: 98,
-        period: 'Jun 11, 2021 - Jul 10, 2021',
-        color: 'danger',
-      },
-      payment: { name: 'PayPal', icon: cibCcPaypal },
-      activity: 'Last month',
-    },
-    {
-      avatar: { src: avatar5, status: 'success' },
-      user: {
-        name: 'Agapetus Tadeáš',
-        new: true,
-        registered: 'Jan 1, 2021',
-      },
-      country: { name: 'Spain', flag: cifEs },
-      usage: {
-        value: 22,
-        period: 'Jun 11, 2021 - Jul 10, 2021',
-        color: 'primary',
-      },
-      payment: { name: 'Google Wallet', icon: cibCcApplePay },
-      activity: 'Last week',
-    },
-    {
-      avatar: { src: avatar6, status: 'danger' },
-      user: {
-        name: 'Friderik Dávid',
-        new: true,
-        registered: 'Jan 1, 2021',
-      },
-      country: { name: 'Poland', flag: cifPl },
-      usage: {
-        value: 43,
-        period: 'Jun 11, 2021 - Jul 10, 2021',
-        color: 'success',
-      },
-      payment: { name: 'Amex', icon: cibCcAmex },
-      activity: 'Last week',
-    },
-  ]
+      activity: games.perDay ? parseInt(games.perDay) : 4,
+    }
+  })
+
+  function getRandomName() {
+    return games[Math.floor(Math.random() * games.length)].name
+  }
+
+  const barChartLabels = games.map((game) => {
+    return game.name
+  })
+
+  const barChartData = games.map((game) => {
+    return game.perDay
+  })
+
+  // const pieRandomColor = '#' + (~~(Math.random() * 2 ** 24)).toString(16).padStart(6, 0)
+
+  const pieRandomColor = () => {
+    const colors = ['#007bff', '#28a745', '#333333', '#c3e6cb', '#dc3545', '#6c757d']
+    return colors[Math.floor(Math.random() * colors.length)]
+  }
 
   return (
     <>
@@ -188,19 +249,19 @@ const Dashboard = () => {
               <h4 id="traffic" className="card-title mb-0">
                 Traffic
               </h4>
-              <div className="small text-medium-emphasis">January - July 2021</div>
+              <div className="small text-medium-emphasis">Over the years of development</div>
             </CCol>
             <CCol sm={7} className="d-none d-md-block">
               <CButton color="primary" className="float-end">
                 <CIcon icon={cilCloudDownload} />
               </CButton>
               <CButtonGroup className="float-end me-3">
-                {['Day', 'Month', 'Year'].map((value) => (
+                {['Stats'].map((value) => (
                   <CButton
                     color="outline-secondary"
                     key={value}
                     className="mx-0"
-                    active={value === 'Month'}
+                    active={value === 'Stats'}
                   >
                     {value}
                   </CButton>
@@ -214,7 +275,7 @@ const Dashboard = () => {
               labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
               datasets: [
                 {
-                  label: 'My First dataset',
+                  label: `${getRandomName()}`,
                   backgroundColor: hexToRgba(getStyle('--cui-info'), 10),
                   borderColor: getStyle('--cui-info'),
                   pointHoverBackgroundColor: getStyle('--cui-info'),
@@ -231,29 +292,45 @@ const Dashboard = () => {
                   fill: true,
                 },
                 {
-                  label: 'My Second dataset',
+                  label: `${getRandomName()}`,
                   backgroundColor: 'transparent',
                   borderColor: getStyle('--cui-success'),
                   pointHoverBackgroundColor: getStyle('--cui-success'),
                   borderWidth: 2,
                   data: [
-                    random(50, 200),
-                    random(50, 200),
-                    random(50, 200),
-                    random(50, 200),
-                    random(50, 200),
-                    random(50, 200),
-                    random(50, 200),
+                    random(60, 180),
+                    random(60, 180),
+                    random(60, 180),
+                    random(60, 180),
+                    random(60, 180),
+                    random(60, 180),
+                    random(60, 180),
                   ],
                 },
                 {
-                  label: 'My Third dataset',
+                  label: `${getRandomName()}`,
                   backgroundColor: 'transparent',
                   borderColor: getStyle('--cui-danger'),
                   pointHoverBackgroundColor: getStyle('--cui-danger'),
                   borderWidth: 1,
                   borderDash: [8, 5],
                   data: [65, 65, 65, 65, 65, 65, 65],
+                },
+                {
+                  label: `${getRandomName()}`,
+                  backgroundColor: 'transparent',
+                  borderColor: getStyle('--cui-warning'),
+                  pointHoverBackgroundColor: getStyle('--cui-warning'),
+                  borderWidth: 2,
+                  data: [
+                    random(80, 190),
+                    random(80, 190),
+                    random(80, 190),
+                    random(80, 190),
+                    random(80, 190),
+                    random(80, 190),
+                    random(80, 190),
+                  ],
                 },
               ],
             }}
@@ -294,7 +371,7 @@ const Dashboard = () => {
           />
         </CCardBody>
         <CCardFooter>
-          <CRow xs={{ cols: 1 }} md={{ cols: 5 }} className="text-center">
+          <CRow md={{ cols: 2 }} className="text-center">
             {progressExample.map((item, index) => (
               <CCol className="mb-sm-2 mb-0" key={index}>
                 <div className="text-medium-emphasis">{item.title}</div>
@@ -308,7 +385,36 @@ const Dashboard = () => {
         </CCardFooter>
       </CCard>
 
-      <WidgetsBrand withCharts />
+      {/* <WidgetsBrand withCharts /> */}
+
+      <CRow className="text-center">
+        <div>
+          <CChart
+            type="polarArea"
+            data={{
+              labels: ['Red', 'Green', 'Yellow', 'Grey', 'Blue'],
+              datasets: [
+                {
+                  data: [11, 16, 7, 3, 14],
+                  backgroundColor: ['#FF6384', '#4BC0C0', '#FFCE56', '#E7E9ED', '#36A2EB'],
+                },
+              ],
+            }}
+          />
+        </div>
+        {/* <CChart
+          type="polarArea"
+          data={{
+            labels: { barChartLabels },
+            datasets: [
+              {
+                data: { barChartData },
+                backgroundColor: { pieRandomColor },
+              },
+            ],
+          }}
+        /> */}
+      </CRow>
 
       <CRow>
         <CCol xs>
@@ -320,14 +426,14 @@ const Dashboard = () => {
                   <CRow>
                     <CCol sm={6}>
                       <div className="border-start border-start-4 border-start-info py-1 px-3">
-                        <div className="text-medium-emphasis small">New Clients</div>
-                        <div className="fs-5 fw-semibold">9,123</div>
+                        <div className="text-medium-emphasis small">Games</div>
+                        <div className="fs-5 fw-semibold">{totalNumberOfGames}</div>
                       </div>
                     </CCol>
                     <CCol sm={6}>
                       <div className="border-start border-start-4 border-start-danger py-1 px-3 mb-3">
-                        <div className="text-medium-emphasis small">Recurring Clients</div>
-                        <div className="fs-5 fw-semibold">22,643</div>
+                        <div className="text-medium-emphasis small">Income</div>
+                        <div className="fs-5 fw-semibold">{totalPurchasePrice}</div>
                       </div>
                     </CCol>
                   </CRow>
@@ -350,14 +456,14 @@ const Dashboard = () => {
                   <CRow>
                     <CCol sm={6}>
                       <div className="border-start border-start-4 border-start-warning py-1 px-3 mb-3">
-                        <div className="text-medium-emphasis small">Pageviews</div>
-                        <div className="fs-5 fw-semibold">78,623</div>
+                        <div className="text-medium-emphasis small">Subscriptions</div>
+                        <div className="fs-5 fw-semibold">{totalMinimumSubscription}</div>
                       </div>
                     </CCol>
                     <CCol sm={6}>
                       <div className="border-start border-start-4 border-start-success py-1 px-3 mb-3">
-                        <div className="text-medium-emphasis small">Organic</div>
-                        <div className="fs-5 fw-semibold">49,123</div>
+                        <div className="text-medium-emphasis small">Purchases</div>
+                        <div className="fs-5 fw-semibold">{totalNumberOfPurchasedGames}</div>
                       </div>
                     </CCol>
                   </CRow>
@@ -391,6 +497,25 @@ const Dashboard = () => {
                       </div>
                       <div className="progress-group-bars">
                         <CProgress thin color="success" value={item.percent} />
+                      </div>
+                    </div>
+                  ))}
+
+                  <div className="mb-5"></div>
+                  <div className="mb-5"></div>
+
+                  {progressGroupExample4.map((item, index) => (
+                    <div className="progress-group" key={index}>
+                      <div className="progress-group-header">
+                        <CIcon className="me-2" icon={item.icon} size="lg" />
+                        <span>{item.title}</span>
+                        <span className="ms-auto fw-semibold">
+                          {item.value}{' '}
+                          <span className="text-medium-emphasis small">({item.percent}%)</span>
+                        </span>
+                      </div>
+                      <div className="progress-group-bars">
+                        <CProgress thin color="primary" value={item.percent} />
                       </div>
                     </div>
                   ))}

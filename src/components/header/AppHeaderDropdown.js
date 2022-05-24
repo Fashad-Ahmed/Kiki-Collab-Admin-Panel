@@ -8,6 +8,7 @@ import {
   CDropdownItem,
   CDropdownMenu,
   CDropdownToggle,
+  CNavLink,
 } from '@coreui/react'
 import {
   cilBell,
@@ -20,11 +21,16 @@ import {
   cilTask,
   cilUser,
 } from '@coreui/icons'
+import { Link, useNavigate } from 'react-router-dom'
 import CIcon from '@coreui/icons-react'
-
 import avatar8 from './../../assets/images/avatars/8.jpg'
+import Login from 'src/views/pages/login/Login'
 
 const AppHeaderDropdown = () => {
+  let navigate = useNavigate()
+  const handleLogOut = () => {
+    navigate('/login')
+  }
   return (
     <CDropdown variant="nav-item">
       <CDropdownToggle placement="bottom-end" className="py-0" caret={false}>
@@ -32,14 +38,14 @@ const AppHeaderDropdown = () => {
       </CDropdownToggle>
       <CDropdownMenu className="pt-0" placement="bottom-end">
         <CDropdownHeader className="bg-light fw-semibold py-2">Account</CDropdownHeader>
-        <CDropdownItem href="#">
-          <CIcon icon={cilBell} className="me-2" />
-          Updates
-          <CBadge color="info" className="ms-2">
-            42
-          </CBadge>
+        <CDropdownItem onClick={handleLogOut}>
+          <CIcon icon={cilUser} className="me-2" />
+          {/* <CNavLink to="/login" component={Login}> */}
+          Log Out
+          {/* </CNavLink> */}
         </CDropdownItem>
-        <CDropdownItem href="#">
+
+        {/* <CDropdownItem href="#">
           <CIcon icon={cilEnvelopeOpen} className="me-2" />
           Messages
           <CBadge color="success" className="ms-2">
@@ -87,7 +93,7 @@ const AppHeaderDropdown = () => {
         <CDropdownItem href="#">
           <CIcon icon={cilLockLocked} className="me-2" />
           Lock Account
-        </CDropdownItem>
+        </CDropdownItem> */}
       </CDropdownMenu>
     </CDropdown>
   )
