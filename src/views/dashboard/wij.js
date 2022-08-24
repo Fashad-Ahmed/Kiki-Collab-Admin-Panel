@@ -65,7 +65,7 @@ const WidgetsDropdown = () => {
               </span>
             </>
           }
-          title="Purchases"
+          title="Customer Order in 30 days"
           action={
             <CDropdown alignment="end">
               <CDropdownToggle color="transparent" caret={false} className="p-0">
@@ -152,7 +152,7 @@ const WidgetsDropdown = () => {
               </span>
             </>
           }
-          title="Games"
+          title="Returning Customers in 30 days"
           action={
             <CDropdown alignment="end">
               <CDropdownToggle color="transparent" caret={false} className="p-0">
@@ -238,7 +238,7 @@ const WidgetsDropdown = () => {
               </span>
             </>
           }
-          title="Subscribers"
+          title="Ongoing Projects in 30 days"
           action={
             <CDropdown alignment="end">
               <CDropdownToggle color="transparent" caret={false} className="p-0">
@@ -311,7 +311,7 @@ const WidgetsDropdown = () => {
               </span>
             </>
           }
-          title="Incomes"
+          title="Income Generated in 30 days"
           action={
             <CDropdown alignment="end">
               <CDropdownToggle color="transparent" caret={false} className="p-0">

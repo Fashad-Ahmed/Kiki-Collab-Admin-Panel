@@ -3,6 +3,7 @@ import { NavLink, useLocation } from 'react-router-dom'
 import PropTypes from 'prop-types'
 
 import { CBadge } from '@coreui/react'
+import './sidebar.css'
 
 export const AppSidebarNav = ({ items }) => {
   const location = useLocation()

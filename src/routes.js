@@ -2,9 +2,16 @@ import React from 'react'
 
 const Dashboard = React.lazy(() => import('./views/dashboard/Dashboard'))
 const Colors = React.lazy(() => import('./views/theme/colors/Colors'))
-const Typography = React.lazy(() => import('./views/theme/typography/Typography'))
+const Typography = React.lazy(() => import('./views/theme/colors/Colors'))
 const Sequence = React.lazy(() => import('./views/pages/sequence/index'))
 const AddGame = React.lazy(() => import('./views/game/index.js'))
+const List = React.lazy(() => import('./views/dashboard/list.js'))
+const EditProfile = React.lazy(() => import('./views/dashboard/EditProfile'))
+const PublicProfile = React.lazy(() => import('./views/dashboard/PublicProfile'))
+const Login = React.lazy(() => import('./views/pages/login/Login'))
+const ViewVendor = React.lazy(() => import('./views/dashboard/viewVendor/viewVendor'))
+const ServicePricing = React.lazy(() => import('./views/dashboard/servicePricing/servicePricing'))
+const CoverageAreas = React.lazy(() => import('./views/dashboard/preferLocation/preferLocation'))
 
 // Base
 const Accordion = React.lazy(() => import('./views/base/accordion/Accordion'))
@@ -52,10 +59,17 @@ const Toasts = React.lazy(() => import('./views/notifications/toasts/Toasts'))
 const Widgets = React.lazy(() => import('./views/widgets/Widgets'))
 
 const routes = [
-  { path: '/', exact: true, name: 'Home' },
+  // { path: '/', exact: true, name: 'Home' },
+  { path: '/', exact: true, element: Login },
   { path: '/dashboard', name: 'Dashboard', element: Dashboard },
   { path: '/add-sequence', name: 'Sequence', element: Sequence },
-  { path: '/add-game', name: 'Add Game', element: AddGame },
+  { path: '/add-game', name: 'Reviews', element: AddGame },
+  { path: '/list', name: 'Games Available', element: List },
+  { path: '/edit-profile', name: 'Edit Profile', element: EditProfile },
+  { path: '/public-profile', name: 'Vendor Profile', element: PublicProfile },
+  { path: '/services-prices', name: 'Services Pricing', element: ServicePricing },
+  { path: '/coverage-areas', name: 'Coverage Areas', element: CoverageAreas },
+  { path: '/view-vendor', name: 'View Vendor', element: ViewVendor },
   { path: '/theme/colors', name: 'Colors', element: Colors },
   { path: '/theme/typography', name: 'Typography', element: Typography },
   { path: '/base', name: 'Base', element: Cards, exact: true },

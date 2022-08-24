@@ -1,0 +1,10 @@
+@font-face {
+    font-family: "Recoleta-Alt-Regular";
+    src: local("Recoleta-Alt-Regular"),
+      url("./fonts/Recoleta-Alt-Regular.ttf") format("truetype");
+    font-weight: normal;
+  }
+
+body {
+    font-family: Recoleta-Alt-Regular;
+  }

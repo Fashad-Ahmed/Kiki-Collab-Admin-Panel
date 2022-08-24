@@ -25,11 +25,11 @@ import { Link, useNavigate } from 'react-router-dom'
 import CIcon from '@coreui/icons-react'
 import avatar8 from './../../assets/images/avatars/8.jpg'
 import Login from 'src/views/pages/login/Login'
-
+import './index.css'
 const AppHeaderDropdown = () => {
   let navigate = useNavigate()
   const handleLogOut = () => {
-    navigate('/login')
+    navigate('/')
   }
   return (
     <CDropdown variant="nav-item">
@@ -45,7 +45,7 @@ const AppHeaderDropdown = () => {
           {/* </CNavLink> */}
         </CDropdownItem>
 
-        {/* <CDropdownItem href="#">
+        <CDropdownItem href="#">
           <CIcon icon={cilEnvelopeOpen} className="me-2" />
           Messages
           <CBadge color="success" className="ms-2">
@@ -93,7 +93,7 @@ const AppHeaderDropdown = () => {
         <CDropdownItem href="#">
           <CIcon icon={cilLockLocked} className="me-2" />
           Lock Account
-        </CDropdownItem> */}
+        </CDropdownItem>
       </CDropdownMenu>
     </CDropdown>
   )

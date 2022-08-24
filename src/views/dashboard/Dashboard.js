@@ -202,14 +202,11 @@ const Dashboard = () => {
     return {
       avatar: game.imageURL,
       user: {
-        name:
-          game.primary == 'Undefined' || game.primary == 'Not Set'
-            ? `User ${game.region}`
-            : game.primary,
+        name: game.primary == 'Undefined' || game.primary == 'Not Set' ? `User` : game.primary,
         new: true,
         registered: game.year == 'Undefined' || game.year == 'Not Set' ? game.year : 2019,
       },
-      country: { name: 'USA', flag: cifUs },
+      country: { name: game.region },
       usage: {
         value: game.perDay > 100 ? 100 : game.perDay - 5,
         period: game.createdAt,
@@ -232,17 +229,18 @@ const Dashboard = () => {
     return game.perDay
   })
 
-  // const pieRandomColor = '#' + (~~(Math.random() * 2 ** 24)).toString(16).padStart(6, 0)
+  const barChartColor = games.map((game) => {
+    return '#' + (~~(Math.random() * 2 ** 24)).toString(16).padStart(6, 0)
+  })
 
-  const pieRandomColor = () => {
-    const colors = ['#007bff', '#28a745', '#333333', '#c3e6cb', '#dc3545', '#6c757d']
-    return colors[Math.floor(Math.random() * colors.length)]
-  }
+  console.log(barChartData)
+  console.log(barChartLabels)
+  console.log(barChartColor)
 
   return (
     <>
       <WidgetsDropdown />
-      <CCard className="mb-4">
+      {/* <CCard className="mb-4">
         <CCardBody>
           <CRow>
             <CCol sm={5}>
@@ -383,20 +381,20 @@ const Dashboard = () => {
             ))}
           </CRow>
         </CCardFooter>
-      </CCard>
+      </CCard> */}
 
       {/* <WidgetsBrand withCharts /> */}
 
-      <CRow className="text-center">
+      {/* <CRow className="text-center">
         <div>
           <CChart
             type="polarArea"
             data={{
-              labels: ['Red', 'Green', 'Yellow', 'Grey', 'Blue'],
+              labels: barChartLabels,
               datasets: [
                 {
-                  data: [11, 16, 7, 3, 14],
-                  backgroundColor: ['#FF6384', '#4BC0C0', '#FFCE56', '#E7E9ED', '#36A2EB'],
+                  data: barChartData,
+                  backgroundColor: barChartColor,
                 },
               ],
             }}
@@ -413,15 +411,15 @@ const Dashboard = () => {
               },
             ],
           }}
-        /> */}
-      </CRow>
+        /> 
+      </CRow> */}
 
       <CRow>
         <CCol xs>
           <CCard className="mb-4">
             <CCardHeader>Traffic {' & '} Sales</CCardHeader>
             <CCardBody>
-              <CRow>
+              {/* <CRow>
                 <CCol xs={12} md={6} xl={6}>
                   <CRow>
                     <CCol sm={6}>
@@ -520,29 +518,29 @@ const Dashboard = () => {
                     </div>
                   ))}
                 </CCol>
-              </CRow>
+              </CRow> */}
 
               <br />
 
               <CTable align="middle" className="mb-0 border" hover responsive>
                 <CTableHead color="light">
                   <CTableRow>
-                    <CTableHeaderCell className="text-center">
+                    {/* <CTableHeaderCell className="text-center">
                       <CIcon icon={cilPeople} />
-                    </CTableHeaderCell>
-                    <CTableHeaderCell>User</CTableHeaderCell>
-                    <CTableHeaderCell className="text-center">Country</CTableHeaderCell>
-                    <CTableHeaderCell>Usage</CTableHeaderCell>
-                    <CTableHeaderCell className="text-center">Payment Method</CTableHeaderCell>
-                    <CTableHeaderCell>Activity</CTableHeaderCell>
+                    </CTableHeaderCell> */}
+                    <CTableHeaderCell>Customer</CTableHeaderCell>
+                    <CTableHeaderCell className="text-center">Location</CTableHeaderCell>
+                    <CTableHeaderCell>Task Completed</CTableHeaderCell>
+                    {/* <CTableHeaderCell className="text-center">Payment Method</CTableHeaderCell>
+                    <CTableHeaderCell>Activity</CTableHeaderCell> */}
                   </CTableRow>
                 </CTableHead>
                 <CTableBody>
                   {tableExample.map((item, index) => (
                     <CTableRow v-for="item in tableItems" key={index}>
-                      <CTableDataCell className="text-center">
+                      {/* <CTableDataCell className="text-center">
                         <CAvatar size="md" src={item.avatar.src} status={item.avatar.status} />
-                      </CTableDataCell>
+                      </CTableDataCell> */}
                       <CTableDataCell>
                         <div>{item.user.name}</div>
                         <div className="small text-medium-emphasis">
@@ -551,7 +549,9 @@ const Dashboard = () => {
                         </div>
                       </CTableDataCell>
                       <CTableDataCell className="text-center">
-                        <CIcon size="xl" icon={item.country.flag} title={item.country.name} />
+                        <div>{item.country.name}</div>
+
+                        {/* <CIcon size="xl" icon={item.country.flag} title={item.country.name} /> */}
                       </CTableDataCell>
                       <CTableDataCell>
                         <div className="clearfix">
@@ -564,13 +564,13 @@ const Dashboard = () => {
                         </div>
                         <CProgress thin color={item.usage.color} value={item.usage.value} />
                       </CTableDataCell>
-                      <CTableDataCell className="text-center">
+                      {/* <CTableDataCell className="text-center">
                         <CIcon size="xl" icon={item.payment.icon} />
                       </CTableDataCell>
                       <CTableDataCell>
                         <div className="small text-medium-emphasis">Last login</div>
                         <strong>{item.activity}</strong>
-                      </CTableDataCell>
+                      </CTableDataCell> */}
                     </CTableRow>
                   ))}
                 </CTableBody>

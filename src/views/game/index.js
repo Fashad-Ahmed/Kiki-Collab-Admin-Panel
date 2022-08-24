@@ -5,21 +5,27 @@ import {
   CCard,
   CCardBody,
   CCardGroup,
+  CCardImage,
+  CCardText,
   CCol,
   CContainer,
   CForm,
   CFormInput,
   CFormSelect,
   CFormTextarea,
+  CImage,
   CInputGroup,
   CInputGroupText,
   CRow,
+  CCardHeader,
+  CCardTitle,
 } from '@coreui/react'
 import CIcon from '@coreui/icons-react'
 import { cilLockLocked, cilUser } from '@coreui/icons'
 import { toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
-
+// import 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css'
+import './index.css'
 const AddGame = () => {
   const [name, setName] = useState('')
   const [description, setDescription] = useState('')
@@ -159,7 +165,85 @@ const AddGame = () => {
             <CCardGroup>
               <CCard className="p-4">
                 <CCardBody>
-                  <CForm>
+                  <CCard style={{ width: '35rem' }}>
+                    <CCardImage
+                      orientation="top"
+                      src="https://canvasjs.com/wp-content/uploads/images/gallery/react-charts/overview/react-drilldown-charts-graphs.png"
+                    />
+                    <CCardBody>
+                      <CCardText>1800 Returning Customers</CCardText>
+                    </CCardBody>
+                  </CCard>
+                  <br />
+                  <CCard style={{ width: '35rem' }}>
+                    <CCardImage
+                      orientation="top"
+                      src="https://canvasjs.com/wp-content/uploads/images/gallery/react-charts/pie/react-funnel-charts-graphs.png"
+                    />
+                    <CCardBody>
+                      <CCardText>80% Profit</CCardText>
+                    </CCardBody>
+                  </CCard>
+                  <br></br>
+                  <br></br>
+
+                  <div className="d-grid">
+                    <CButton color="primary">Submit Feedback Request</CButton>
+                  </div>
+                  <br></br>
+                  <br></br>
+
+                  <CCard>
+                    <CCardHeader>Feedbacks</CCardHeader>
+                    <CCardBody>
+                      <CCardTitle>The service is superb</CCardTitle>
+                      <CCardText>
+                        I am astonished the amount and quality of work has been done. Highly
+                        recommended.
+                      </CCardText>
+                      <CButton href="#">Walter Samuel, MIT, USA</CButton>
+                    </CCardBody>
+                    <br></br>
+                    <br></br>
+
+                    <CCardBody>
+                      <CCardTitle>Highly Impressed!!</CCardTitle>
+                      <CCardText>
+                        I am astonished the amount and quality of work has been done. Highly
+                        recommended.
+                      </CCardText>
+                      <CButton href="#">Jon Jones, Qwik, Canada</CButton>
+                    </CCardBody>
+                  </CCard>
+                  <br></br>
+                  <br></br>
+
+                  <CCard style={{ width: '35rem' }}>
+                    <CCardImage
+                      orientation="top"
+                      src="https://searchengineland.com/wp-content/seloads/2018/11/Google-Reviews-Study-How-Many-Reviews-Do-Local-Businesses-Need-How-Many-Reviews-Do-Businesses-Need-2018-11-06.jpg"
+                    />
+                  </CCard>
+
+                  {/* <CCard style={{ width: '18rem' }}>
+                    <CCardImage orientation="top" src="/images/react.jpg" />
+                    <CCardBody>
+                      <CCardText>
+                        Some quick example text to build on the card title and make up the bulk of
+                        the cars content.
+                      </CCardText>
+                    </CCardBody>
+                  </CCard> */}
+                  {/*                   
+                   <CForm>
+                     <CImage
+                      align="center"
+                      rounded
+                      class="rounded-circle"
+                      src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQJTsXeW4YKA1CZXwfiOMa3wC1jNRIuQfN705eEUimicEWl8Dq5sNnpbc8hT1i53F0Jbuc&usqp=CAU"
+                      width={300}
+                      height={300}
+                    /> 
                     <CInputGroup className="mb-3">
                       <CFormInput
                         placeholder="Name"
@@ -168,6 +252,8 @@ const AddGame = () => {
                         value={name}
                         onChange={(e) => setName(e.target.value)}
                         aria-describedby="basic-addon1"
+                        valid
+                        required
                       />
                     </CInputGroup>
 
@@ -179,6 +265,8 @@ const AddGame = () => {
                         value={description}
                         onChange={(e) => setDescription(e.target.value)}
                         aria-describedby="basic-addon1"
+                        valid
+                        required
                       />
                     </CInputGroup>
 
@@ -190,6 +278,8 @@ const AddGame = () => {
                         value={developer}
                         onChange={(e) => setDeveloper(e.target.value)}
                         aria-describedby="basic-addon1"
+                        valid
+                        required
                       />
                     </CInputGroup>
 
@@ -220,6 +310,8 @@ const AddGame = () => {
                         value={console}
                         onChange={(e) => setConsole(e.target.value)}
                         aria-describedby="basic-addon1"
+                        valid
+                        required
                       />
                     </CInputGroup>
 
@@ -231,6 +323,8 @@ const AddGame = () => {
                         value={region}
                         onChange={(e) => setRegion(e.target.value)}
                         aria-describedby="basic-addon1"
+                        valid
+                        required
                       />
                     </CInputGroup>
 
@@ -242,6 +336,8 @@ const AddGame = () => {
                         value={purchasePrice}
                         onChange={(e) => setPurchasePrice(e.target.value)}
                         aria-describedby="basic-addon1"
+                        valid
+                        required
                       />
                     </CInputGroup>
 
@@ -253,6 +349,8 @@ const AddGame = () => {
                         value={purchaseStatus}
                         onChange={(e) => setPurchaseStatus(e.target.value)}
                         aria-describedby="basic-addon1"
+                        valid
+                        required
                       />
                     </CInputGroup>
 
@@ -266,6 +364,8 @@ const AddGame = () => {
                         value={perDay}
                         onChange={(e) => setPerDay(e.target.value)}
                         aria-describedby="basic-addon1"
+                        valid
+                        required
                       />
                     </CInputGroup>
 
@@ -279,6 +379,8 @@ const AddGame = () => {
                         value={minimumSubscription}
                         onChange={(e) => setMinimumSubscription(e.target.value)}
                         aria-describedby="basic-addon1"
+                        valid
+                        required
                       />
                     </CInputGroup>
 
@@ -292,6 +394,8 @@ const AddGame = () => {
                         value={year}
                         onChange={(e) => setYear(e.target.value)}
                         aria-describedby="basic-addon1"
+                        valid
+                        required
                       />
                     </CInputGroup>
 
@@ -303,9 +407,11 @@ const AddGame = () => {
                         value={packageId}
                         onChange={(e) => setPackageId(e.target.value)}
                         aria-describedby="basic-addon1"
+                        valid
+                        required
                       />
                     </CInputGroup>
-                    {/*yeh ids aur password lgin response se ayega  */}
+                    yeh ids aur password lgin response se ayega  
                     <CInputGroup className="mb-3">
                       <CFormInput
                         placeholder="Login Id"
@@ -334,6 +440,8 @@ const AddGame = () => {
                         value={psn}
                         onChange={(e) => setPsn(e.target.value)}
                         aria-describedby="basic-addon1"
+                        valid
+                        required
                       />
                     </CInputGroup>
 
@@ -341,6 +449,8 @@ const AddGame = () => {
                       className="mb-3"
                       value={twoFA}
                       onChange={(e) => setTwoFA(e.target.value)}
+                      valid
+                      required
                     >
                       <CInputGroupText component="label" htmlFor="inputGroupSelect02">
                         two FA
@@ -360,7 +470,7 @@ const AddGame = () => {
                         // onChange={(e) => setPsn(e.target.value)}
                         aria-describedby="basic-addon1"
                       />
-                      {/* from api respone */}
+                     from api respone 
                     </CInputGroup>
 
                     <CInputGroup className="mb-3">
@@ -371,6 +481,8 @@ const AddGame = () => {
                         value={psnID}
                         onChange={(e) => setPsnID(e.target.value)}
                         aria-describedby="basic-addon1"
+                        valid
+                        required
                       />
                     </CInputGroup>
 
@@ -382,6 +494,8 @@ const AddGame = () => {
                         value={consoleSerialNumber}
                         onChange={(e) => setConsoleSerialNumber(e.target.value)}
                         aria-describedby="basic-addon1"
+                        valid
+                        required
                       />
                     </CInputGroup>
 
@@ -393,6 +507,8 @@ const AddGame = () => {
                         value={purchasePriceInPKR}
                         onChange={(e) => setPurchasePriceInPKR(e.target.value)}
                         aria-describedby="basic-addon1"
+                        valid
+                        required
                       />
                     </CInputGroup>
 
@@ -404,6 +520,8 @@ const AddGame = () => {
                         value={primary}
                         onChange={(e) => setPrimary(e.target.value)}
                         aria-describedby="basic-addon1"
+                        valid
+                        required
                       />
                     </CInputGroup>
 
@@ -415,6 +533,8 @@ const AddGame = () => {
                         value={imageURL}
                         onChange={(e) => setImageURL(e.target.value)}
                         aria-describedby="basic-addon1"
+                        valid
+                        required
                       />
                     </CInputGroup>
 
@@ -426,6 +546,8 @@ const AddGame = () => {
                         value={videoURL}
                         onChange={(e) => setVideoURL(e.target.value)}
                         aria-describedby="basic-addon1"
+                        valid
+                        required
                       />
                     </CInputGroup>
 
@@ -437,6 +559,8 @@ const AddGame = () => {
                         value={coverURL}
                         onChange={(e) => setCoverURL(e.target.value)}
                         aria-describedby="basic-addon1"
+                        valid
+                        required
                       />
                     </CInputGroup>
 
@@ -448,6 +572,8 @@ const AddGame = () => {
                         value={typeGame}
                         onChange={(e) => setTypeGame(e.target.value)}
                         aria-describedby="basic-addon1"
+                        valid
+                        required
                       />
                     </CInputGroup>
 
@@ -460,6 +586,8 @@ const AddGame = () => {
                         id="inputGroupFile01"
                         value={photos}
                         onChange={(e) => setPhotos(e.target.value)}
+                        valid
+                        required
                       />
                     </CInputGroup>
 
@@ -475,7 +603,7 @@ const AddGame = () => {
                         </CButton>
                       </CCol>
                     </CRow>
-                  </CForm>
+                  </CForm>  */}
                 </CCardBody>
               </CCard>
             </CCardGroup>

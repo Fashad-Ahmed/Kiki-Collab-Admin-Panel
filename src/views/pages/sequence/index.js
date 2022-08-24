@@ -17,7 +17,7 @@ import CIcon from '@coreui/icons-react'
 import { cilLockLocked, cilUser } from '@coreui/icons'
 import { toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
-
+import './index.css'
 const Sequence = () => {
   const [title, setTitle] = useState('')
   const [type, setType] = useState('')
