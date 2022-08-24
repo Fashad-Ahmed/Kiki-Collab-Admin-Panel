@@ -1,0 +1,9 @@
+* {
+    --cui-success-rgb: 112, 202, 197;
+}
+
+.bg-success {
+    --cui-bg-opacity: 1;
+    --cui-success-rgb: 112, 202, 197;
+    background-color: rgba(var(--cui-success-rgb), var(--cui-bg-opacity)) !important;
+}

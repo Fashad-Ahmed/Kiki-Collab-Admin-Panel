@@ -1,5 +1,6 @@
 import React from 'react'
 import MUIDataTable from 'mui-datatables'
+import './index.css'
 const ServicePricing = () => {
   const data = [
     ['Bartending', '$10'],
@@ -31,7 +32,11 @@ const ServicePricing = () => {
   const options = {
     filterType: 'checkbox',
   }
-  return <MUIDataTable title={'Pricing List'} data={data} columns={columns} options={options} />
+  return (
+    <div className="main">
+      <MUIDataTable title={'Pricing List'} data={data} columns={columns} options={options} />
+    </div>
+  )
 }
 
 export default ServicePricing

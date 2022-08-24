@@ -1,0 +1,16 @@
+.bg-info {
+    --cui-bg-opacity: 1;
+    --cui-info-rgb: 112,202,197;
+    background-color: rgba(var(--cui-info-rgb), var(--cui-bg-opacity)) !important;
+}
+
+.bg-warning {
+    --cui-bg-opacity: 1;
+    --cui-warning-rgb: 255, 237, 213;
+    background-color: rgba(var(--cui-warning-rgb), var(--cui-bg-opacity)) !important;
+}
+
+* {
+    --cui-warning-rgb: 255, 237, 213;
+    --cui-info-rgb: 112,202,197;
+}

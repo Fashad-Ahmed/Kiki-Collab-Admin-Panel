@@ -13,6 +13,7 @@ import { CChartBar, CChartLine } from '@coreui/react-chartjs'
 import CIcon from '@coreui/icons-react'
 import { cilArrowBottom, cilArrowTop, cilOptions } from '@coreui/icons'
 import { games } from './data'
+import './wij.css'
 
 const WidgetsDropdown = () => {
   const totalNumberOfPurchasedGames = games.reduce((acc, curr) => {
@@ -175,9 +176,9 @@ const WidgetsDropdown = () => {
                 datasets: [
                   {
                     label: 'My First dataset',
-                    backgroundColor: 'transparent',
-                    borderColor: 'rgba(255,255,255,.55)',
-                    pointBackgroundColor: getStyle('--cui-info'),
+                    backgroundColor: '#70cac5',
+                    borderColor: '#70cac5',
+                    pointBackgroundColor: '#adf0ee0',
                     data: [1, 18, 9, 17, 34, 22, 11],
                   },
                 ],
